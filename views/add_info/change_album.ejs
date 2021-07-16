@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/add_info/add_album.css">
+        <!-- 한글 글씨체 -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+        <!-- 영어 글씨체 -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <form id="add_album_form" action="/add_info/change/album/<%= album._id%>" method="POST" enctype="multipart/form-data">
+            <div id="title_deco">앨범 수정</div>
+            <hr size="3" color="#637988">
+            <!-- 앨범 명 등록 -->
+            <div class="div_deco">
+                <label for="album_name" id="album_name">Album Name *</label>
+                <input id="album_name_input" type="text" name="album_name" value="<%= album.album_name %>" required>
+            </div>
+            <!-- 아티스트 명 -->
+            <div class="div_deco">
+                <label for="artist_name" id="artist_name">Artist Name *</label>
+                <select name="artist_name" id="artist_name_input" required>
+                    <option value="<%= album.artist_id %>"><%= album.artist_name %></option>
+                    <% for(i=0; i<artist_all.length; i++) { %>
+                        <option value="<%= artist_all[i]._id %>"><%= artist_all[i].name %></option>
+                    <% } %>
+                </select>
+            </div> 
+            <!-- 앨범 출시일 -->
+            <div class="div_deco">
+                <label for="release_date" id="release_date">Release date *</label>
+                <input id="release_date_input" type="date" name="release_date" required>
+            </div>
+            <!-- 앨범 사진 -->
+            <div class="div_deco">
+                <label for="file" id="album_photo">Album Photo</label>
+                <input multiple="multiple" id="album_photo_input" type="file" name="file">
+                <div id="detail_info_photo">* 앨범 사진은 여러 개 저장 할 수 있습니다. 단, 대표 사진은 가장 마지막 저장된 사진으로 지정됩니다.</div>
+                <% if (album.file_name.length) { for(i=0; i<album.file_name.length; i++) { %>
+                    <div id="now_file">
+                        <img id="album_img" src="<%= album.file_path[i].path %>">
+                        <div id="delete_text">
+                            <div id="file_name">파일 명 : <%= album.file_name[i].name %></div>
+                            <div>
+                                <img id="trash" src="/img/trash.png" width="20px" height="20px"><span id="delete">파일 삭제</span>
+                                <input type="checkbox" id="deletefile" value="<%= i %>" name="deletefile">
+                            </div>
+                        </div>
+                    </div>
+                <% } } %>
+            </div>
+            <button id="add_album_btn" type="submit">Change Album</button>
+        </form>
+    </body>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/ko.min.js"></script>
+    <script>
+        document.getElementById("release_date_input").value = getFormatDate("<%= album.release_date %>");
+        function getFormatDate(date){
+            date = moment(date).format();
+            return date.substring(0,10);
+        }
+    </script>
+</html>

@@ -1,0 +1,161 @@
+<!-- 검색 index 화면 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/searchtest.css">
+        <!-- 한글 글씨체 -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+        <!-- 영어 글씨체 -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
+
+        <style>
+            .artist_list{
+                display: inline;
+            }
+            .album_list{
+                display: inline;
+            }
+            .song_list{
+                display: inline;
+            }
+            .artist_detail{
+                resize: none;
+                width: 100%;
+                height: 120px;
+            }
+            .for_rela{
+                position: inherit;
+                margin-left: 320px;
+            }
+            .for_fix{
+                position: inherit;
+                margin-left: 220px;
+                
+            }
+            .for_fix2{
+                position: inherit;
+                margin-left: 220px;
+            }
+
+
+            .for_rela-x{
+                position: static;
+                float: left;
+            }
+            .for_fix-x{
+                position: static;
+                float: left;
+            }
+            .for_fix-x2{
+                position: static;
+                float: left;
+            }
+            
+            .artist_detail{
+                margin-top: 2%;
+            }
+            .for_album{
+                margin-top: 120px;
+            }
+            .for_song{
+                margin-top: 120px;
+            }
+
+
+
+
+
+            .plus{
+                margin-left: 5px;
+                margin-top: 2px;
+            }
+        </style>
+    </head>
+    <body>
+        <% if(artists.length){ %>
+            <div id="artist_search">
+                <h2><div class="search_main_text">아티스트</div></h2>
+                <hr size="3" color="#637988">
+                <% for(i=0; i<artists.length; i++) { %>
+                    <div class="artist_list">
+                        <img src="<%= artists[i].file_path[0].path %>" width="300px" height="300px" class="for_rela-x">
+                        <div class="for_rela">
+                            <h2><div class="artist_artist_name"><%= artists[i].name %></div></h2>
+                            <% if(artists[i].member.length){ %>
+                                <h4><div class="member">맴버명 : <%= artists[i].member %></div></h4>
+                            <% } %>
+                            <div>
+                                <h4>데뷔일 :
+                                <div class="artist_start_date">  <%= artists[i].start_date %></div></h4>
+                            </div>
+                        </div>
+                        <textarea class="artist_detail" readonly><%= artists[i].artist_detail %></textarea>
+                        
+                    </div>
+                <% } %>
+            </div>
+        <% } %>
+        <% if(albums.length){ %>
+            <div id="album_search">
+                <h2><div class="search_main_text">앨범</div></h2>
+                <hr size="3" color="#637988">
+                <% for(i=0; i<albums.length; i++) { %>
+                    <div class="album_list">
+                        <img src="<%= albums[i].file_path[0].path %>" width="200px" height="200px" class="for_fix-x2">
+                        <div class="for_fix2">
+                            <h2><div class="album_name">앨범명 : <%= albums[i].album_name %></div></h2>
+                            <h4><div class="album_artist_name">아티스트명 : <%= albums[i].artist_name %></div>
+                            <div class="album_release_date">출시 날짜 : <%= albums[i].release_date %></div>
+                            <div class="album_click">스트리밍 횟수 : <% if(albums[i].click){ %> <%= albums[i].click %> <% } else { %> 0 <% } %></div></h4><!-- 스트리밍 횟수가 없으면(null값이면) 0으로 표기 -->
+                        </div>
+                        <div class="for_album"><p>        </p> </div>
+                    </div>
+                <% } %>
+            </div>
+        <% } %>
+        <% if(songs.length){ %>
+            <div id="song_search">
+                <h2><div class="search_main_text">음원</div></h2>
+                <hr size="3" color="#637988">
+                <% for(i=0; i<songs.length; i++) { %>
+                    <div class="song_list">
+                        <img src="<%= songs[i].photo %>" width="200px" height="200px" class="for_fix-x">
+                        <div class="for_fix">
+                            <h2><div class="song_name">음원명 : <%= songs[i].song_name %></div></h2>
+                            <h4><div class="song_artist_name">아티스트명 : <%= songs[i].artist_name %></div>
+                            <div class="song_release_date">출시 날짜 : <%= songs[i].release_date %></div>
+                            <div class="song_click">스트리밍 횟수 : <% if(songs[i].click){ %> <%= songs[i].click %> <% } else { %> 0 <% } %></div><!-- 스트리밍 횟수가 없으면(null값이면) 0으로 표기 -->
+                            <div class="song_plus">노래 추가 버튼<img class="plus" src="/img/plus.png" onclick="add_playlist('<%= songs[i]._id %>')" width="20px" height="20px"></div></h4>
+                        </div>
+                        <div class="for_song"><p>        </p> </div>
+                    </div>
+                <% } %>
+            </div>
+        <% } %>
+        <% if(!songs.length && !albums.length && !artists.length) { %> <!-- 검색 결과가 아무것도 없는 경우 -->
+            <div class="no_search">검색 결과가 없습니다.</div>
+        <% } %>
+    </body>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/ko.min.js"></script>
+    <script type="text/javascript" src="/javascript/iframe.js"></script>
+    <script type="text/javascript" src="/javascript/iframe_playlist.js"></script>
+    <script type="text/javascript" src="/javascript/mainplaylist.js"></script>
+    <script>
+        window.onload = () => {
+          if (new URL(location.href).searchParams.get('error')) {
+            alert(new URL(location.href).searchParams.get('error'));
+          }
+        };
+        const artist_start_date = document.getElementsByClassName("artist_start_date");
+        const album_release_date = document.getElementsByClassName("album_release_date");
+        for(i = 0; i < artist_start_date.length; i++){
+            artist_start_date[i].textContent = moment(artist_start_date[i].textContent).format('LL');
+        }
+        for(i = 0; i < album_release_date.length; i++){
+            album_release_date[i].textContent = moment(album_release_date[i].textContent).format('LL');
+        }
+    </script>
+</html>

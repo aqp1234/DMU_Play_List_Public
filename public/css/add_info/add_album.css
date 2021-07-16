@@ -1,0 +1,53 @@
+/* 한 영 글씨체 각각 다르게 적용 */
+body {font-family:'Cabin' ,'Noto Sans KR', 'sans-serif';}
+@font-face {
+    font-family: 'Cabin';
+    font-style: normal;
+    font-weight: 300;
+    src: local('※'),
+    url('../fonts/Cabin-Regular.eot'),
+    url('../fonts/Cabin-Regular.eot#iefix') format('embedded-opentype')
+    url('../fonts/Cabin-Regular.woff') format('woff'),
+    url('../fonts/Cabin-Regular.otf') format('opentype'),
+    url('../fonts/Cabin-Regular.ttf') format('truetype');
+    unicode-range:U+0041-005A, U+0061-007A, U+0030-0039;
+}
+
+body{position: relative;}
+/* add_artist.ejs */
+#add_album_form{position: absolute; width: fit-content; display: inline-block; margin-top: 20px; left: 18%;}
+#title_deco{margin-bottom: 10px; font-size: 20px; font-weight: bolder;}
+/* 앨범명 등록 */
+#album_name{font-size: 20px; font-weight: bolder; margin-right: 10px; color: rgb(15, 15, 0);}
+#album_name_input{width: 400px; height: 15px; padding: 10px; font-size: 15px; border-radius: 25px;
+                   border: 2px solid rgb(240, 96, 80); box-shadow: 0 0 1px 1px rgb(240, 96, 80);}
+#album_name_input:focus{outline: none;}
+/* 아티스트명 등록 */
+#artist_name{font-size: 20px; font-weight: bolder; margin-right: 10px; color: rgb(15, 15, 0);}
+#artist_name_input{width: 200px; height: 45px; padding: 10px; font-size: 13px; border-radius: 25px;
+                   border: 2px solid rgb(240, 96, 80); box-shadow: 0 0 1px 1px rgb(240, 96, 80);
+                   -webkit-appearance: none; -moz-appearance: none; appearance: none; background: url('../../img/arrow.png') no-repeat 92% 50% / 10px 10px;}
+#artist_name_input:focus{outline: none;}
+#artist_name_input::-ms-expand {display: none;}
+select:required:invalid{font-weight: bolder;}
+/* 앨범 출시일 */
+#release_date{font-size: 20px; font-weight: bolder; margin-right: 10px; color: rgb(15, 15, 0);}
+#release_date_input{width: 200px; height: 25px; padding: 5px; font-size: 13px; border-radius: 25px;
+                  border: 2px solid rgb(240, 96, 80); box-shadow: 0 0 1px 1px rgb(240, 96, 80);}
+#release_date_input:focus{outline: none;}
+/* 앨범 사진 */
+#album_photo{font-size: 20px; font-weight: bolder; margin-right: 10px; color: rgb(15, 15, 0);}
+#detail_info_photo{font-size: 15px; font-weight: lighter; color: rgb(99, 121, 136); margin-left: 125px; margin-top: 5px;}
+/* 저장 버튼 */
+#add_album_btn{float: right; margin-top: 10px; padding: 7px 12px; width: 200px; height: 40px; border: none; border-radius: 25px;
+                background-color: rgb(224, 224, 224); font-size: 15px; font-weight: bolder; font-family: 'Cabin', sans-serif;}
+/* class 값 */
+.div_deco{margin-bottom: 17px; margin-top: 20px;}
+
+/* change */
+#trash{width: 15px; height: auto;}
+#delete{font-size: 15px; color: rgb(99, 121, 136); margin-left: 3px; font-weight: lighter;}
+#now_file{margin-left: 125px; display: flex; margin-top: 10px;}
+#file_name{font-size: 15px; font-weight: lighter;}
+#album_img{width: 100px; height: auto;}
+#delete_text{display: flex; flex-direction: column; justify-content: flex-end; margin-left: 5px;}

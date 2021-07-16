@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/css/customer/detail.css">
+    </head>
+    <body>
+        <span class="text_deco13"><a href='/customer/question/delete/<%= question._id %>' class="text_deco14">문의 삭제</a></span>
+        <div class="detail_section">
+          <div id="detail_top">
+            <hr class="line_deco01" width = "100%" color="#414141">
+              <div class="detail_title"><%= question.subject %></div>
+            <hr class="line_deco01" width = "100%" color="#414141">
+          </div>
+          <textarea readonly id="detail_body"><%= question.content %></textarea>
+          <div class="detail_writer">작성자 : <%= question.user_name %></div>
+          <hr class="line_deco01" width = "100%" color="#414141">
+          <% if (answer) { %><!-- 답변이 달린 경우 답변 또한 보여준다 -->
+            <textarea readonly id="detail_body"><%= answer.content %></textarea>
+            <div class="detail_answer_writer" value="<%= answer.user_id %>">작성자 : 관리자</div><!-- 사용자에게는 작성자는 관리자로 통일하여 보여준다. 사용자 고유 id값을 value 에 저장하여 누가 작성했는지는 확인 가능하다. -->
+            <hr class="line_deco01" width = "100%" color="#414141">
+            <% if(user){ if(user.is_admin){ %><!-- 관리자라면 답변 삭제 가능 -->
+            <span class="text_deco13"><a href='/customer/answer/delete/<%= answer._id %>' class="text_deco14">답변 삭제</a></span>
+          <% }}}else{ %><!-- 답변이 없는 경우 --> 
+            <% if(user){ if(user.is_admin){ %>
+              <form id="join-form" action="/customer/answer/<%= question._id %>" method="post">
+                <textarea id="detail_body" name="content"></textarea>
+                <div class="detail_answer_writer" value="<%= user.id %>">작성자 : <%= user.name %></div>
+                <hr class="line_deco01" width = "100%" color="#414141">
+                <button id="add_question" type="submit" class="btn">Answer</button><!-- 새로운 답변 개시 -->
+              </form>
+          <% }}} %>
+        </div>
+    </body>
+    <script src = 'https://unpkg.com/axios/dist/axios.min.js'></script>
+    <script type="text/javascript" src="/javascript/iframe.js"></script>
+    <script>
+        window.onload = () => { // window.onload = window에서 이 ejs문서가 사용되는 시점
+          if (new URL(location.href).searchParams.get('error')) { // url 에서 error이란 파라미터를 검색
+            alert(new URL(location.href).searchParams.get('error')); // error파라미터에 있는 내용 alert하기
+          }
+        };
+    </script>
+</html>

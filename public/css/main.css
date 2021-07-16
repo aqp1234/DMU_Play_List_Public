@@ -1,0 +1,24 @@
+table{width: 100%; border-spacing: 0 12px;}
+.table_title{font-size: 17px; font-weight: bolder; color: rgb(99, 121, 137); background-color: rgb(224, 224, 224); height: 40px;}
+/* 한 영 글씨체 각각 다르게 적용 */
+body {font-family:'Cabin' ,'Noto Sans KR', 'sans-serif';}
+@font-face {
+    font-family: 'Cabin';
+    font-style: normal;
+    font-weight: 300;
+    src: local('※'),
+    url('../fonts/Cabin-Regular.eot'),
+    url('../fonts/Cabin-Regular.eot#iefix') format('embedded-opentype')
+    url('../fonts/Cabin-Regular.woff') format('woff'),
+    url('../fonts/Cabin-Regular.otf') format('opentype'),
+    url('../fonts/Cabin-Regular.ttf') format('truetype');
+    unicode-range:U+0041-005A, U+0061-007A, U+0030-0039;
+}
+/* 최신 음악 */
+#new_song{position: relative; display: inline-block; text-align: center; width: 100%;}
+.song_photo{width: 170px; height: auto;}
+.song_name{font-size: 16px; font-weight: bolder; margin-top: 10px; color: rgb(15, 15, 0);}
+/* 인기 앨범 */
+#popularity_album{position: relative; display: inline-block; text-align: center; margin-top: 10px; width: 100%;}
+.album_photo{width: 170px; height: auto;}
+.album_name{font-size: 16px; font-weight: bolder; margin-top: 10px; color: rgb(15, 15, 0);}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/add_info/add_song.css">
+        <!-- 한글 글씨체 -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+        <!-- 영어 글씨체 -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <form id="add_album_form" action="/add_info/add_song" method="POST" enctype="multipart/form-data">
+            <div id="title_deco">음원 추가</div>
+            <hr size="3" color="#637988">
+            <!-- 음원 명 등록 -->
+            <div class="div_deco">
+                <label for="song_name" id="song_name">Song Name *</label>
+                <input id="song_name_input" type="text" name="song_name" required>
+            </div>
+            <!-- 아티스트 명 -->
+            <div class="div_deco">
+                <label for="artist_name" id="artist_name">Artist Name *</label>
+                <select name="artist_name" id="artist_name_input" required>
+                    <option hidden="" disabled="disabled" selected="selected" value="">☁ 아티스트 선택 ☁</option>
+                    <% for(i=0; i<artist.length; i++) { %>
+                        <option value="<%= artist[i]._id %>"><%= artist[i].name %></option>
+                    <% } %>
+                </select>
+            </div>
+            <!-- 앨범 명 -->
+            <div class="div_deco">
+                <label for="ablum_name" id="album_name">Album Name *</label>
+                <select name="album_name" id="album_name_input" required>
+                    <option hidden="" disabled="disabled" selected="selected" value="">☁ 앨범 선택 ☁</option>
+                    <% for(i=0; i<album.length; i++) { %>
+                        <option value="<%= album[i]._id %>"><%= album[i].album_name %></option>
+                    <% } %>
+                </select>
+            </div> 
+            <!-- 음원 -->
+            <div class="div_deco">
+                <label for="file" id="song">Add Song *</label>
+                <input multiple="multiple" id="song_input" type="file" name="file" required>
+                <div id="detail_info_src">* 음원은 파일을 여러 개 업로드 하셔도 가장 처음 파일만 저장됩니다.</div>
+            </div>
+            <button id="add_song_btn" type="submit">Add New Song</button>
+        </form>
+    </body>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/ko.min.js"></script>
+    <script type="text/javascript" src="/javascript/iframe.js"></script>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <style>
+            .search_menu{
+                float:left;
+                margin: 0px;
+            }
+            .smenu_item{
+                display: inline-block;
+            }
+        </style>
+        
+    </head>
+    <body>
+        <!--<link rel="stylesheet" type="text/css" href="/css/side_bar.css">-->
+        <link rel="stylesheet" type="text/css" href="/css/customer/index.css">
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+        <script src = 'https://unpkg.com/axios/dist/axios.min.js'></script>
+        <script>
+            window.onload = () => {
+              if (new URL(location.href).searchParams.get('error')) {
+                alert(new URL(location.href).searchParams.get('error'));
+              }
+            };
+        </script>
+           
+        <div>
+            <table class="search_index_result">
+                <thead class="s_i_r_head">
+                    <!--여기 디비를 어케 나오게 해야 되려나-->
+
+                    <th scope="col">앨범 명</th>
+                    <th scope="col" class="artist">아티스트명</th>
+                    <th scope="col" class="date">날짜</th>
+                </thead>
+                <tbody>
+                    <% if(count == null || posts.length == 0){ %>
+                        <tr>
+                            <td colspan="2">There is no data to show</td>
+                        </tr>
+                    <% } %>
+                    
+                        <% for( i=0; i < ring; i++) { %>  
+                            <tr>
+                                <td>
+                                    <div class="info_num" ><%= album[i].album_name %></div>
+                                </td>
+                                <td>
+                                    <div class="artist_name" ><%= artist[i].name %></div>
+                                </td> 
+                                <td>
+                                    <div class="date" ><%= album[i].release_date %></div>
+                                </td>
+                            </tr>
+                        <% } %>
+                    
+                </tbody>   
+            </table>
+        </div>
+        
+        <!--페이징 함수 넣던 자리,,,,,,,,,,,,,,,,,,,-->
+        
+    </body>
+</html>

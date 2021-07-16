@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/add_info/add_song.css">
+        <!-- 한글 글씨체 -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+        <!-- 영어 글씨체 -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <form id="add_album_form" action="/add_info/change/song/<%= song._id%>" method="POST" enctype="multipart/form-data">
+            <div id="title_deco">음원 수정</div>
+            <hr size="3" color="#637988">
+            <!-- 음원 명 등록 -->
+            <div class="div_deco">
+                <label for="song_name" id="song_name">Song Name *</label>
+                <input id="song_name_input" type="text" name="song_name" value="<%= song.song_name %>" required>
+            </div>
+            <!-- 아티스트 명 -->
+            <div class="div_deco">
+                <label for="artist_name" id="artist_name">Artist Name *</label>
+                <select name="artist_name" id="artist_name_input" required>
+                    <option value="<%= song.artist_id %>"><%= song.artist_name %></option>
+                    <% for(i=0; i<artist_all.length; i++) { %>
+                        <option value="<%= artist_all[i]._id %>"><%= artist_all[i].name %></option>
+                    <% } %>
+                </select>
+            </div>
+            <!-- 앨범 명 -->
+            <div class="div_deco">
+                <label for="ablum_name" id="album_name">Album Name *</label>
+                <select name="album_name" id="album_name_input" required>
+                    <option value="<%= song.album_id %>"><%= album.album_name %></option>
+                    <% for(i=0; i<album_all.length; i++) { %>
+                        <option value="<%= album_all[i]._id %>"><%= album_all[i].album_name %></option>
+                    <% } %>
+                </select>
+            </div> 
+            <!-- 음원 -->
+            <div class="div_deco">
+                <label for="file" id="song">Add Song *</label>
+                <input multiple="multiple" id="song_input" type="file" name="file">
+                <div id="detail_info_song">* 새로운 파일을 등록하시면 이전 파일은 삭제됩니다.</div>
+                <% if (song.src) { %>
+                    <div id="now_file">
+                        <div id="delete_text">
+                            <div id="file_name">파일 경로 : <%= song.src %></div>
+                            <div>
+                                <img id="trash" src="/img/trash.png" width="20px" height="20px"><span id="delete">파일 삭제</span>
+                                <input type="checkbox" id="deletefile" value="<%= i %>" name="deletefile">
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+            <button id="add_song_btn" type="submit">Change Song</button>
+        </form>
+    </body>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/ko.min.js"></script>
+    <script>
+    </script>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/css/customer/detail.css">
+    </head>
+    <body>
+        <% if(user.is_admin){ %><!-- 로그인 한 사용자가 관리자일때 공지 삭제 가능 -->
+        <span class="text_deco13"><a href='/customer/notice/delete/<%= notice._id %>' class="text_deco14">공지 삭제</a></span>
+        <% } %>
+        <div class="detail_section">
+          <div id="detail_top">
+            <hr class="line_deco01" width = "100%" color="#414141">
+              <div class="detail_title"><%= notice.subject %></div><!-- 공지 제목 -->
+            <hr class="line_deco01" width = "100%" color="#414141">
+          </div>
+          <textarea readonly id="detail_body"><%= notice.content %></textarea><!-- 공지 상세 내용, 읽기만 가능하게 readonly 처리 -->
+          <hr class="line_deco01" width = "100%" color="#414141">
+        </div>
+    </body>
+    <script src = 'https://unpkg.com/axios/dist/axios.min.js'></script>
+    <script type="text/javascript" src="/javascript/iframe.js"></script>
+    <script>
+        window.onload = () => {
+          if (new URL(location.href).searchParams.get('error')) {
+            alert(new URL(location.href).searchParams.get('error'));
+          }
+        };
+    </script>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="stylesheet" type="text/css" href="/css/customer/index.css">
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div>
+            <div class="main_top">
+                <span class="text_deco01">문의 게시판</span>
+            </div>
+            <hr width = "100%" color="#414141" size = "3">
+            <nav id="customer_menu_bar">
+                <table id="customer_menu_bar_table">
+                    <tr>
+                        <td><a href="/customer" class="customer_menu_link_deco">홈</a></td>
+                        <td><a href="/customer/myquestion" class="customer_menu_link_deco">내 문의 내역</a></td>
+                        <td><a href="/customer/questionboard" class="customer_menu_link_deco">문의하기</a></td>
+                    </tr>
+                </table>
+            </nav>
+            <hr width = "100%" color="#414141" size = "3">
+            <div class="notice_section">
+                <div class="main_top">
+                    <span class="text_deco02">공지 사항</span>
+                    <% if(user){ if(user.is_admin) { %><!-- 관리자는 공지사항 추가 가능 -->
+                        <a href="/customer/add_notice" class="add_notice_btn">공지사항 추가</a>
+                    <% }} %>
+                </div>
+                <div class="notice_table">
+                    <table width="100%">
+                        <thead>
+                            <tr>
+                                <th class="text_deco03">NO.</th>
+                                <th class="text_deco04">분류</th>
+                                <th class="text_deco05">제목</th>
+                                <th class="text_deco06">최종수정일</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i = 0; i < notices.length; i++){ %><!-- 현재 공지사항 리스트 -->
+                            <tr>
+                                <td class="text_deco07"><%= i+1 %></td>
+                                <td class="text_deco08"><%= notices[i].notice_type %></td>
+                                <td class="text_deco09"><a href="/customer/notice/detail/<%= notices[i]._id %>"><%= notices[i].subject %></a></td>
+                                <td class="text_deco10"><%= notices[i].updatedAt %></td>
+                            </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/ko.min.js"></script>
+    <script type="text/javascript" src="/javascript/iframe.js"></script>
+    <script src = 'https://unpkg.com/axios/dist/axios.min.js'></script>
+    <script>
+        window.onload = () => {
+          if (new URL(location.href).searchParams.get('error')) {
+            alert(new URL(location.href).searchParams.get('error'));
+          }
+        };
+        const start_date = document.getElementsByClassName("text_deco10");
+        for(i = 0; i < start_date.length; i++){
+            start_date[i].textContent = moment(start_date[i].textContent).format('LL'); // 날짜 데이터를 보기좋게 변경
+        }
+    </script>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/add_info/index.css">
+        <!-- 한글 글씨체 -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+        <!-- 영어 글씨체 -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <table id="add_info_index">
+            <thead>
+                <tr>
+                    <td class="thead_deco">등록된 아티스트<a class="add_button_deco" href="/add_info/add_artist" target="mainiframe">+</a></div></td>
+                    <td class="thead_deco">등록된 앨범<a class="add_button_deco" href="/add_info/add_album" target="mainiframe">+</a></td>
+                    <td class="thead_deco">등록된 음원<a class="add_button_deco" href="/add_info/add_song" target="mainiframe">+</a></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="table_deco">
+                        <% if(artist.length) { %>
+                            <div class="scroll">
+                                <!-- 등록된 아티스트 -->
+                                <% for(i=0; i<artist.length; i++) { %>
+                                    <div id="artist_box">
+                                        <div class="show_artist"><span>아티스트 명 : </span><span><%= artist[i].name %></span></div>
+                                        <% if(artist[i].file_name.length) { %>
+                                            <!-- 가장 최근에 올린 사진 값 -->
+                                            <img class="artist_photo" src="<%= artist[i].file_path[artist[i].file_name.length-1].path %>">
+                                        <% } else { %>
+                                            <div class="no_photo">사진정보가 존재하지 않습니다.</div>
+                                        <% } %>
+                                        <div class="show_artist">
+                                            <% if (artist[i].member.length) { %>
+                                                <span>멤버 명 : </span>
+                                                <% for(a=0; a<artist[i].member.length; a++) { %>
+                                                    <span class="member"><%= artist[i].member[a] %></span>
+                                            <% }} %>
+                                        </div>
+                                        <% if (artist[i].start_date) { %>
+                                            <div class="show_artist"><span>데뷔 일 : </span><span class="date"><%= artist[i].start_date%></span></div>
+                                        <% } %>
+                                        <% if (artist[i].artist_detail) { %>
+                                            <textarea class="artist_detail" readonly><%= artist[i].artist_detail%></textarea>
+                                        <% } %>
+                                        <div class="change_delete">
+                                            <a href="/add_info/change/artist/<%= artist[i]._id %>" class="change_content">( 수정 )</a>
+                                            <a href="/add_info/delete/artist/<%= artist[i]._id %>" class="delete_content" onclick="deleteArtist()">( 삭제 )</a>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            </div>
+                        <% } else { %>
+                            <div class="no_data">아티스트 정보가 존재하지 않습니다.<br>위 + 버튼을 눌러 아티스트를 추가해보세요 !</div>
+                        <% } %>
+                    </td>
+                    <td class="table_deco">
+                        <% if(album.length) { %>
+                            <div class="scroll">
+                                <!-- 등록된 앨범 -->
+                                <% for(i=0; i<album.length; i++) { %>
+                                    <div id="album_box">
+                                        <% if(album[i].file_name.length) { %>
+                                            <img class="photo" src="<%= album[i].file_path[album[i].file_name.length-1].path %>"> 
+                                        <% } else { %>
+                                            <div class="no_photo">사진정보가 존재하지 않습니다.</div>
+                                        <% } %>
+                                        <div><span>아티스트 명 : </span><span><%= album[i].artist_name %></span></div>
+                                        <div><span>앨범 명 : </span><span><%= album[i].album_name %></span></div>
+                                        <div><span>앨범 출시일 : <span class="date"><%= album[i].release_date%></span></span></div>
+                                        <div class="change_delete">
+                                            <a href="/add_info/change/album/<%= album[i]._id %>" class="change_content">( 수정 )</a>
+                                            <a href="/add_info/delete/album/<%= album[i]._id %>" class="delete_content" onclick="deleteAlbum()">( 삭제 )</a>
+                                        </div>
+                                    </div>
+                                <% } %>  
+                            </div> 
+                        <% } else { %>
+                            <div class="no_data">앨범 정보가 존재하지 않습니다.<br>위 + 버튼을 눌러 앨범을 추가해보세요 !</div>
+                        <% } %>
+                    </td>
+                    <td class="table_deco">
+                        <% if(song.length) { %>
+                            <div class="scroll">
+                                <!-- 등록된 음원 -->
+                                <% for(i=0; i<song.length; i++) { %>
+                                    <div id="song_box">
+                                        <% if(song[i].photo!=null) { %>
+                                            <img class="photo" src="<%= song[i].photo %>">
+                                        <% } else { %>
+                                            <div class="no_photo">사진정보가 존재하지 않습니다.</div>
+                                        <% } %>
+                                        <div><span>아티스트 명 : </span><span><%= song[i].artist_name %></span></div>
+                                        <div><span>음원 제목 : </span><span><%= song[i].song_name %></span></div>
+                                        <div><span>음원 출시일 : </span><span class="date"><%= song[i].release_date%></span></div>
+                                        <div class="change_delete">
+                                            <a href="/add_info/change/song/<%= song[i]._id %>" class="change_content">( 수정 )</a>
+                                            <a href="/add_info/delete/song/<%= song[i]._id %>" class="delete_content" onclick="deleteSong()">( 삭제 )</a>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            </div>
+                        <% } else { %>
+                            <div class="no_data">음원 정보가 존재하지 않습니다.<br>위 + 버튼을 눌러 음원을 추가해보세요 !</div>
+                        <% } %>
+                    </td>
+                </tr>
+            </tbody>
+        </table> 
+    </body>
+    <script type="text/javascript" src="/javascript/iframe.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/ko.min.js"></script>
+    <script>
+        // 데뷔일 화면 출력 타입 변경
+        const start_date = document.getElementsByClassName("date");
+        for(i = 0; i < start_date.length; i++){
+            start_date[i].textContent = moment(start_date[i].textContent).format('LL');
+        }
+        function deleteArtist(){
+            alert("해당 아티스트의 모든 앨범 및 음원 정보를 함께 삭제합니다. 삭제하시겠습니까?");
+        }
+        function deleteAlbum(){
+            alert("해당 앨범 내부의 모든 음원 정보를 함께 삭제합니다. 삭제하시겠습니까?");
+        }
+        function deleteSong(){
+            alert("음원 정보를 삭제하시겠습니까?");
+        }
+    </script>
+</html>

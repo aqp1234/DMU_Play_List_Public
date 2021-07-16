@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/css/customer/add.css">
+    </head>
+    <body>
+        <div class="main_top">
+            <span class="text_deco01">새로운 질문 등록하기</span>
+        </div>
+        <hr width = "100%" color="#414141" size = "3">
+        <form id="join-form" action="/customer/question/add" method="post">
+            <div class="input-group">
+                <label for="subject" class="text_deco03">제목</label><br> <!-- 문의 제목 입력 -->
+                <input id="subject" type="text" name="subject"></div>
+            </div>
+            <div class="input-group">
+                <label for="content" class="text_deco03">문의 내용</label><br> <!-- 세부내용 입력 -->
+                <textarea id="content" type="text" name="content"></textarea>
+            </div>
+            <div class="input-group">
+                <div class="text_deco03"><input id="is_secret" type="checkbox" name="is_secret">비밀글로 문의하려면 체크해주세요</div>
+            </div>
+            <br>
+            <button id="add_question" type="submit" class="btn">질문하기</button>
+        </form>
+    </body>
+    <script src = 'https://unpkg.com/axios/dist/axios.min.js'></script>
+    <script type="text/javascript" src="/javascript/iframe.js"></script>
+    <script>
+        window.onload = () => {
+          if (new URL(location.href).searchParams.get('loginError')) {
+            alert(new URL(location.href).searchParams.get('loginError'));
+          }
+        };
+    </script>
+</html>

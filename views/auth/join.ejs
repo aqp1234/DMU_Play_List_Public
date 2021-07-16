@@ -1,0 +1,48 @@
+<!-- 회원 가입 페이지 -->
+<!DOCTYPE html>
+<html>
+  <head>
+   <!-- 레이아웃 불러오기 -->
+   <!-- 회원 가입 페이지 관련 css 연결 링크 -->
+   <link rel="stylesheet" type="text/css" href="/css/join.css">
+   <!-- 영어 글씨체 -->
+   <link rel="preconnect" href="https://fonts.gstatic.com">
+   <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div style="width: 100%; text-align: center;">
+      <form id="join-form" action="/auth/join" method="post">
+        <div class="input-group">
+          <div class="input-form-text">First Name</div>
+          <input class="join-input" type="firstname" name="firstname">
+        </div>
+        <div class="input-group">
+          <div class="input-form-text">Second Name</div>
+          <input class="join-input" type="text" name="secondname">
+        </div>
+        <div class="input-group">
+          <div class="input-form-text">Email Adress</div>
+          <input class="join-input" type="email" name="email">
+        </div>
+        <div class="input-group">
+          <div class="input-form-text">Password</div>
+          <input class="join-input" type="password" name="password">
+        </div>
+        <div class="input-group">
+          <div class="input-form-text">Phone</div>
+          <input class="join-input" type="text" name="phone">
+        </div>
+        <button id="join-btn" type="submit" class="btn">회원가입</button>
+        <div id="about_login">이미 회원이시라면? <a href="/main" id="login_link" target="mainiframe">로그인</a></div>
+      </form>
+    </div>
+  </body>
+  <script type="text/javascript" src="/javascript/iframe.js"></script>
+  <script>
+    window.onload = () => {
+     if (new URL(location.href).searchParams.get('error')) {
+       alert('이미 존재하는 이메일입니다.');
+     }
+    };
+  </script>
+</html>

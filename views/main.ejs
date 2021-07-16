@@ -1,0 +1,90 @@
+<!-- DMU PLAY LIST main 화면 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/main.css">
+        <!-- 한글 글씨체 -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+        <!-- 영어 글씨체 -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <!-- 최신곡 -->
+        <div id="new_song">
+            <table>
+                <tr class="table_title"><td colspan="5">최 신 곡</td></tr>
+                <% if(song.length == 0) { %>
+                    <tr class="nodata"><td colspan="5">최신곡 정보가 존재하지 않습니다.</td></tr>
+                <% } else { %>
+                    <tr>
+                        <% for(i=0; i<song.length; i++) { %>
+                            <td>
+                                <% if(song[i].photo!=null) { %>
+                                    <img class="song_photo" src="<%= song[i].photo %>">
+                                <% } else { %>
+                                    <img class="album_photo" src="/img/no_image.png" alt="no_img">
+                                <% } %>
+                                <div class="song_name" onclick="add_playlist('<%= song[i]._id %>')"><%= song[i].song_name %></div>
+                            </td>
+                        <% } %>
+                    </tr>
+                <% } %>
+            </table>
+        </div>
+        <!-- 인기 앨범 -->
+        <div id="popularity_album">
+            <table>
+                <tr class="table_title"><td colspan="5">인기 앨범</td></tr>
+                <% if(album.length == 0) { %>
+                    <tr class="nodata"><td colspan="5">인기 앨범 정보가 존재하지 않습니다.</td></tr>
+                <% } else { %>
+                    <tr>
+                        <!-- router에 담긴 album에 저장된 값의 길이 -->
+                        <% for(i=0; i<album.length; i++) { %>
+                            <td>
+                                <% if(album[i].file_name.length) { %>
+                                    <!-- 가장 마지막에 저장된 경로 값을 받아옴 -->
+                                    <img class="album_photo" src="<%= album[i].file_path[album[i].file_name.length-1].path %>">
+                                <% } else { %>
+                                    <!-- 저장된 사진이 없는 경우 -->
+                                    <img class="album_photo" src="/img/no_image.png" alt="no_img">
+                                <% } %>
+                                <div class="album_name"><%= album[i].album_name %></div>
+                            </td>
+                        <% } %>
+                    </tr>
+                <% } %>
+            </table>
+        </div>
+    </body>
+    <script type="text/javascript" src="/javascript/iframe.js"></script>
+    <script type="text/javascript" src="/javascript/mainplaylist.js"></script>
+    <script type="text/javascript" src="/javascript/iframe_playlist.js"></script>
+    <script>
+        // 음원 명이 15글자 이상인 경우 뒤 글자는 ... 으로 화면에 출력함
+        var song_div = document.getElementsByClassName("song_name");
+        for(i=0; i<song_div.length; i++){
+            if(song_div[i].textContent.length>15){
+                var song_name = song_div[i].textContent.substring(0,15);
+                song_name = song_name + " ...";
+                song_div[i].textContent = song_name;
+            }
+        }
+        // 앨범 명이 15글자 이상인 경우 뒤 글자는 ... 으로 화면에 출력함
+        var album_div = document.getElementsByClassName("album_name");
+        for(i=0; i<album_div.length; i++){
+            if(album_div[i].textContent.length > 15){
+                var album_name = album_div[i].textContent.substring(0,15);
+                album_name = album_name + " ...";
+                album_div[i].textContent = album_name;
+            }
+        }
+        window.onload = () => {
+          if (new URL(location.href).searchParams.get('error')) {
+            alert(new URL(location.href).searchParams.get('error'));
+          }
+        };
+    </script>
+</html>

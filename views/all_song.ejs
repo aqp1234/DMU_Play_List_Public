@@ -1,0 +1,66 @@
+<!-- DMU PLAY LIST main 화면 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/all_song.css">
+        <!-- 한글 글씨체 -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+        <!-- 영어 글씨체 -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <table id="thead_table">
+            <thead>
+                <tr>
+                    <td id="thead_deco1">발매일</td>
+                    <td colspan="2" id="thead_deco2">음원 명</td>
+                    <td id="thead_deco3">추가</td>
+                </tr>
+            </thead>
+        </table>
+        <div id="scroll">
+        <table id="tbody_table">
+            <tbody>
+                <% if(song.length) { %>
+                    <% for(i=0; i<song.length; i++) { %>
+                        <tr>
+                            <td class="tbody_deco1"><span class="date"><%= song[i].release_date %></span></td>
+                            <td class="tbody_deco2">
+                                <div class="music_info_box">
+                                    <% if(song[i].photo!=null) { %>
+                                        <img class="photo" src="<%= song[i].photo %>">
+                                    <% } else { %>
+                                        <img class="photo" src="/img/no_image.png" alt="no_img">
+                                    <% } %>
+                                    <div class="text_info">
+                                        <div class="song_name"><%= song[i].song_name %></div>
+                                        <div class="artist_name"><%= song[i].artist_name %></div>
+                                        <div class="album_name"><%= album[i].album_name %></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="tbody_deco3"><img class="plus" src="img/plus.png" onclick="add_playlist('<%= song[i]._id %>')"></td>
+                        </tr>
+                <% } } else { %>
+                    <div id="no_song"> 곡이 존재하지 않습니다 !</div>
+                <% } %>
+            </tbody>
+        </table>
+        </div>
+    </body>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/ko.min.js"></script>
+    <script type="text/javascript" src="/javascript/iframe.js"></script>
+    <script type="text/javascript" src="/javascript/iframe_playlist.js"></script>
+    <script type="text/javascript" src="/javascript/mainplaylist.js"></script>
+    <script>
+        // 데뷔일 화면 출력 타입 변경
+        const release_date = document.getElementsByClassName("date");
+        for(i = 0; i < release_date.length; i++){
+            release_date[i].textContent = moment(release_date[i].textContent).format('LL');
+        }
+        
+    </script>
+</html>

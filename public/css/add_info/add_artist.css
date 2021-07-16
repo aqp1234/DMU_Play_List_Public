@@ -1,0 +1,57 @@
+/* 한 영 글씨체 각각 다르게 적용 */
+body {font-family:'Cabin' ,'Noto Sans KR', 'sans-serif';}
+@font-face {
+    font-family: 'Cabin';
+    font-style: normal;
+    font-weight: 300;
+    src: local('※'),
+    url('../fonts/Cabin-Regular.eot'),
+    url('../fonts/Cabin-Regular.eot#iefix') format('embedded-opentype')
+    url('../fonts/Cabin-Regular.woff') format('woff'),
+    url('../fonts/Cabin-Regular.otf') format('opentype'),
+    url('../fonts/Cabin-Regular.ttf') format('truetype');
+    unicode-range:U+0041-005A, U+0061-007A, U+0030-0039;
+}
+
+body{position: relative;}
+/* add_artist.ejs */
+#add_artist_form{position: absolute; width: fit-content; display: inline-block; margin-top: 20px; left: 17%;}
+#title_deco{margin-bottom: 10px; font-size: 20px; font-weight: bolder;}
+/* 아티스트명 등록 */
+#artist_name{font-size: 20px; font-weight: bolder; margin-right: 10px; color: rgb(15, 15, 0);}
+#artist_name_input{width: 250px; height: 15px; padding: 10px; font-size: 15px; border-radius: 25px;
+                   border: 2px solid rgb(240, 96, 80); box-shadow: 0 0 1px 1px rgb(240, 96, 80);}
+#artist_name_input:focus{outline: none;}
+/* (그룹일 경우) 멤버명 등록 : 띄어쓰기로 구분해서 저장 */
+#member_name{font-size: 20px; font-weight: bolder; margin-right: 10px; color: rgb(15, 15, 0);}
+#member_name_input{width: 450px; height: 15px; padding: 10px; font-size: 15px; border-radius: 25px;
+                   border: 2px solid rgb(240, 96, 80); box-shadow: 0 0 1px 1px rgb(240, 96, 80);}
+#member_name_input:focus{outline: none;}
+#detail_info_member{font-size: 15px; font-weight: lighter; color: rgb(99, 121, 136); margin-left: 140px; margin-top: 5px;}
+/* 데뷔일 */
+#start_date{font-size: 20px; font-weight: bolder; margin-right: 10px; color: rgb(15, 15, 0);}
+#start_date_input{width: 200px; height: 25px; padding: 5px; font-size: 13px; border-radius: 25px;
+                  border: 2px solid rgb(240, 96, 80); box-shadow: 0 0 1px 1px rgb(240, 96, 80);}
+#start_date_input:focus{outline: none;}
+/* 아티스트 사진 */
+#artist_photo{font-size: 20px; font-weight: bolder; margin-right: 10px; color: rgb(15, 15, 0);}
+#detail_info_photo{font-size: 15px; font-weight: lighter; color: rgb(99, 121, 136); margin-left: 115px; margin-top: 5px;}
+/* 아티스트 설명 */
+#artist_detail{font-size: 20px; font-weight: bolder; margin-right: 10px; color: rgb(15, 15, 0); display: block; margin-bottom: 10px;}
+#artist_detail_input{resize: none; width: 650px; height: 150px; padding: 15px; font-size: 13px; border-radius: 25px;
+                     border: 2px solid rgb(240, 96, 80); box-shadow: 0 0 1px 1px rgb(240, 96, 80); overflow-y: scroll;}
+#artist_detail_input::-webkit-scrollbar {display: none;}
+#artist_detail_input:focus{outline: none;}
+/* 저장 버튼 */
+#add_artist_btn{float: right; margin-top: 10px; padding: 7px 12px; width: 200px; height: 40px; border: none; border-radius: 25px;
+                background-color: rgb(224, 224, 224); font-size: 15px; font-weight: bolder; font-family: 'Cabin', sans-serif;}
+/* class 값 */
+.div_deco{margin-bottom: 15px; margin-top: 10px;}
+
+/* change */
+#trash{width: 15px; height: auto;}
+#delete{font-size: 15px; color: rgb(99, 121, 136); margin-left: 3px; font-weight: lighter;}
+#now_file{margin-left: 115px; display: flex; margin-top: 10px;}
+#file_name{font-size: 15px; font-weight: lighter;}
+#artist_img{width: 100px; height: auto;}
+#delete_text{display: flex; flex-direction: column; justify-content: flex-end; margin-left: 5px;}

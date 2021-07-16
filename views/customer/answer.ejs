@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <form id="join-form" action="/customer/answer/<%= questionid %>" method="post">
+            <div class="input-group">
+                <label for="content">Content</label><br> <!-- 답변 내용 입력 -->
+                <textarea id="content" type="text" name="content"></textarea>
+            </div>
+            <button id="add_question-btn" type="submit" class="btn">Answer</button>
+        </form>
+    </body>
+    <script type="text/javascript" src="/javascript/iframe.js"></script>
+    <script src = 'https://unpkg.com/axios/dist/axios.min.js'></script>
+    <script>
+        window.onload = () => {
+          if (new URL(location.href).searchParams.get('error')) {
+            alert(new URL(location.href).searchParams.get('error'));
+          }
+        };
+    </script>
+</html>

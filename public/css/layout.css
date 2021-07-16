@@ -1,0 +1,178 @@
+body {font-family:'Cabin' ,'Noto Sans KR', 'sans-serif';}
+@font-face {
+    font-family: 'Cabin';
+    font-style: normal;
+    font-weight: 300;
+    src: local('※'),
+    url('../fonts/Cabin-Regular.eot'),
+    url('../fonts/Cabin-Regular.eot#iefix') format('embedded-opentype')
+    url('../fonts/Cabin-Regular.woff') format('woff'),
+    url('../fonts/Cabin-Regular.otf') format('opentype'),
+    url('../fonts/Cabin-Regular.ttf') format('truetype');
+    unicode-range:U+0041-005A, U+0061-007A, U+0030-0039;
+}
+
+html{text-align: -webkit-center;}
+header{width: 90%; display: flex; align-items: center; justify-content: space-around;}
+body{width: 90%;}
+/* 로고, 검색창, 사용자 로그인 상태 */
+header{width: 100%;}
+/* #header_table{text-align: center;}
+#item01{width: 10%;}
+#item02{width: 65%;}
+#item03{width: 25%;} */
+/* 로고 css */
+#logo{position: relative; width: 250px; height: auto; margin: 20px 0px 0px -20px; z-index: -1;}
+/* 검색창 css */
+#search_form{margin: 20px 0px 0px -15px; display: flex; align-content: center;}
+#search{width: 600px; height: 50px; border-radius: 10px; padding: 5px 10px; font-size: 20px;
+        border: 3.5px solid rgb(99, 121, 137); box-shadow: 0 0 1px 1px rgb(99, 121, 137);}
+#search:focus {outline:none;}
+#search_button{position: relative; width: 50px; height: 50px; border-radius: 50%; padding: 5px; margin-left: 20px;
+               border: 3px solid rgb(99, 121, 137); box-shadow: 0 0 1px 1px rgb(99, 121, 137);}
+#search_button_img{width: 20px; height: auto;}
+/* 로그인/회원가입 or 회원정보 */
+#about_user{font-size: 18px; font-weight: bolder; font-family: 'Noto Sans KR', sans-serif; margin-top: 10px;}
+#user_name{color: rgb(15, 15, 0);}
+#user_deco{margin-left: 10px; color: rgb(99, 121, 137);}
+#login_text{margin-right: 10px; color: rgb(99, 121, 137);}
+#logout_text{margin-left: 10px; color: rgb(99, 121, 137);}
+#join_text{margin-left: 10px; color: rgb(99, 121, 137);}
+/* 메뉴바 css */
+#menu_bar{width: 100%; margin-top: 25px;}
+#menu_bar_table{width: 100%; height: 50px; text-align: center; background-color: rgb(240, 96, 80); table-layout: fixed;}
+.menu_link_deco{font-size: 17px; font-weight: bolder; font-family: 'Noto Sans KR', sans-serif; color: rgb(255, 255, 255); text-decoration: none;}
+/* 비 로그인 시 로그인 창 */
+#login-form{display: inline-block; padding: 15px; background-color: rgb(224, 224, 224); border-radius: 5px; 
+            float: right; margin-top: 15px; width: 18%; text-align: center;}
+#login_button_input{vertical-align: middle;}
+.input-group{margin-bottom: 10px;}
+#login_input{display: inline-block; margin-bottom: 5px;}
+.login_text_deco{font-size: 15px; font-weight: bolder; font-family: 'Noto Sans KR', sans-serif; color: rgb(15, 15, 0); float: left;}
+.login_input_deco{width: 185px; height: 20px; padding: 3px; font-size: 15px; margin-top: 5px; font-size: 15px;}
+#login_btn{width: 193px; height: 30px; padding: 3px; font-weight: bolder; font-size: 15px; font-family: 'Cabin', sans-serif; 
+           border: none; background-color: rgb(240, 240, 240); margin-bottom: 5px;}
+.login_q_deco{font-size: 15px; font-family: 'Noto Sans KR', sans-serif; color: rgb(173, 173, 173);}
+.join{font-size: 15px; font-family: 'Noto Sans KR', sans-serif; color: rgb(173, 173, 173);}
+
+/* 플레이 리스트 */
+#playlist{margin-top: 15px; float: right; width: 20%; height: 600px; background-color: rgb(235, 235, 235); border-radius: 5px;}
+#playlistdiv{overflow-y: scroll; height: 480px; background-color: rgb(235, 235, 235); border-radius: 5px;}
+#playlistdiv::-webkit-scrollbar {width: 7px;}
+#playlistdiv::-webkit-scrollbar-thumb{height: 10%; background-color: rgb(240, 96, 80); border-radius: 10px;}
+#playlistdiv::-webkit-scrollbar-track{background-color: rgb(219, 219, 219);}
+.playlist_song_button{display: flex; float: right; align-items: center; margin-right: 10px;}
+.playlist_song_div{display: flex;justify-content: space-between; align-items: center; padding-left: 10px; padding-top:5px;}
+.playlist_content{font-size: 16px; display: flex; height: 40px; align-items: center;}
+.playlist_upper{display: inline-block; font-size: 30px;}
+.playlist_lower{display: inline-block; font-size: 30px;}
+.playlist_delete{display: inline-block; font-size: 25px; font-weight: bolder; margin-top: -3px; margin-left: 3px;}
+.controls{text-align: center; padding: 20px 0px;}
+#play_stop{display: flex; justify-content: center; align-items: center; margin-bottom: 5px;}
+#play{display: inline-block; width: 40px; height: 40px; text-align: center;}
+#pause{display: inline-block; width: 40px; height: 30px; text-align: center;}
+#sound_div{display: flex; justify-content: center; align-items: center;}
+#soundimg{width: 20px; height: auto; margin-right: 10px;}
+#nowaudio{font-size: 20px; font-weight: bolder; margin-bottom: 5px;}
+.playlist_upper{width: 25px; height: 15px; margin-right: 5px;}
+.playlist_lower{width: 25px; height: 15px; margin-right: 5px;}
+.upperimg{width: 100%; height: 100%;}
+.lowerimg{width: 100%; height: 100%;}
+#nocash{margin-left: 10px; font-size: 20px; text-align: center;}
+
+/* 음악 컨트롤러 */
+#time_div{display: flex; align-items: center; justify-content: space-evenly;}
+#currentTime{display: inline-block;}
+#maxTime{display: inline-block;}
+#timerange {
+  height: 25px;
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 40%;
+  text-align: center;
+  display: inline-block;
+  background: rgb(235, 235, 235);
+}
+#timerange:focus {
+  outline: none;
+}
+#timerange::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 5px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000;
+  background: #2497E3;
+  border-radius: 1px;
+  border: 0px solid #000000;
+}
+#timerange::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 1px solid #2497E3;
+  height: 18px;
+  width: 18px;
+  border-radius: 25px;
+  background: #A1D0FF;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -7px;
+}
+#timerange:focus::-webkit-slider-runnable-track {
+  background: #2497E3;
+}
+#timerange::-moz-range-track {
+  width: 100%;
+  height: 5px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 0px 0px 0px #000000;
+  background: #2497E3;
+  border-radius: 1px;
+  border: 0px solid #000000;
+}
+#timerange::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000000;
+  border: 1px solid #2497E3;
+  height: 18px;
+  width: 18px;
+  border-radius: 25px;
+  background: #A1D0FF;
+  cursor: pointer;
+}
+#timerange::-ms-track {
+  width: 100%;
+  height: 5px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+#timerange::-ms-fill-lower {
+  background: #2497E3;
+  border: 0px solid #000000;
+  border-radius: 2px;
+  box-shadow: 0px 0px 0px #000000;
+}
+#timerange::-ms-fill-upper {
+  background: #2497E3;
+  border: 0px solid #000000;
+  border-radius: 2px;
+  box-shadow: 0px 0px 0px #000000;
+}
+#timerange::-ms-thumb {
+  margin-top: 1px;
+  box-shadow: 0px 0px 0px #000000;
+  border: 1px solid #2497E3;
+  height: 18px;
+  width: 18px;
+  border-radius: 25px;
+  background: #A1D0FF;
+  cursor: pointer;
+}
+#timerange:focus::-ms-fill-lower {
+  background: #2497E3;
+}
+#timerange:focus::-ms-fill-upper {
+  background: #2497E3;
+}

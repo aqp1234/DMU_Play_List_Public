@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <style>
+            
+            .welcome_deul{
+                float:right;
+                margin-top: 2%;
+                color:rgb(92, 87, 87);    
+            }
+            
+            .forIU{
+                float:right;    
+                text-align: center;
+                width: 100%;
+                margin-top: 6.3%;
+            }
+            .minitext{
+                float: left;
+                
+                text-align: center;
+                margin-left: 50%;
+                margin-top: 1%;
+                color:rgb(92, 87, 87);   
+            }
+        </style>
+        
+    </head>
+    <body>
+        <!--<link rel="stylesheet" type="text/css" href="/css/side_bar.css">-->
+        <link rel="stylesheet" type="text/css" href="/css/customer/index.css">
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+        <script src = 'https://unpkg.com/axios/dist/axios.min.js'></script>
+        <script>
+            window.onload = () => {
+              if (new URL(location.href).searchParams.get('error')) {
+                alert(new URL(location.href).searchParams.get('error'));
+              }
+            };
+        </script>
+
+        <div class="welcome_deul"><h2> 찾고 싶은 노래가 있으신가요? 검색창에 검색해보세요 !</h2>
+        
+
+        </div>
+        <h4 class="minitext">지금 이 노래 뭘까? DMU PLAY LIST 에서 검색해 보세요.</h4>
+        <img class="forIU" src="/img/forIU.png">
+        <!--검색 조건 없이 페이지 눌렀을 때를 위한 페이지-->
+        
+    </body>
+</html>

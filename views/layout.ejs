@@ -1,0 +1,153 @@
+<html>
+    <head>
+        <title>DMU PLAY LIST</title>
+        <link rel="stylesheet" type="text/css" href="/css/layout.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <div id="item01"><a href="/main" target="mainiframe"><img id="logo" src="/img/dmuply.png" alt="logo"></a></div>
+            <div id="item02">
+                <form id="search_form" action="/search" method="get" target="mainiframe">
+                    <input id="search" name="searchText" type="text" value="<%= searchText %>">
+                    <button id="search_button" type="submit"><img id="search_button_img" src="/img/search_button.png" alt="search_button"></button>
+                </form>    
+            </div>
+            <div id="item03">
+                <div id="about_user">
+                    <% if(user) { %>
+                        <!-- 사용자 로그인이 완료된 상태이면 사용자 정보를 반환 / ex) 여승원 고객님 안녕하세요! -->
+                        <span id="user_name"><%= user.name %></span><span id="user_deco">님 반갑습니다 !</span>
+                        <span><a href='/auth/logout' id="logout_text">LOGOUT</a></span>
+                    <% } else { %>
+                        <!-- 사용자 로그인이 미 완료된 상태라면 로그인 화면으로 갈 수 있는 링크를 연결해줌 / ex) 로그인 -->
+                        <span><a href='/main' id="login_text" target="mainiframe">로그인</a></span>
+                        <span style="color:rgb(15, 15, 0);">/</span>
+                        <span><a href='/auth/join' id="join_text" target="mainiframe">회원가입</a></span>
+                    <% } %>
+                </div>
+            </div>
+        </header>
+        <nav id="menu_bar">
+            <table id="menu_bar_table">
+                <tr>
+                    <td><a href='/chart' class="menu_link_deco" target="mainiframe">DMU 차트 10</a></td>
+                    <td><a href="/all_song" class="menu_link_deco" target="mainiframe">모든 음악</a></td>
+                    <td><a href="/kakaopay" class="menu_link_deco" target="mainiframe">이용권 구매</a></td>
+                    <td><a href="/customer" class="menu_link_deco" target="mainiframe">문의 게시판</a></td>
+                    <% if(user) { if(user.is_admin) { %>
+                        <td><a href="/add_info" class="menu_link_deco" target="mainiframe">음원 정보 추가</a></td>
+                    <% } } %>    
+                </tr>
+            </table>
+        </nav>
+        <iframe src="/main" name="mainiframe" frameborder="0" id="mainiframe" onload="calcHeight();" scrolling="no" style="width: 79%; overflow-x:hidden; overflow:auto;"></iframe>
+        <!-- 플레이 리스트 -->
+        <% if(user) { %>
+            <div id="playlist">
+                <% if(user.cash){ %> <!-- 사용자가 결제를 한 경우 -->
+                    <audio id="myaudio" preload="metadata">
+                        <source id="mysource" type="audio/mp3">
+                    </audio>
+                    <div class="controls">
+                        <% if(playlist[0]) { %><!-- 플레이 리스트에 노래가 있는 경우 -->
+                            <div id="nowaudio"><%= playlist[0].song_name %></div>
+                        <% } else { %>
+                            <div id="nowaudio">노래가 없습니다.</div>
+                        <% } %>
+                        <div id="play_stop">
+                            <div id="play" onclick="playAudio()"><img src="/img/play.png" width="100%" height="100%"></div><!-- 노래 시작 버튼 -->
+                            <div id="pause" onclick="pauseAudio()"><img src="/img/pause.png" width="100%" height="100%"></div><!-- 노래 일시중지 버튼 -->
+                        </div>
+                        <div id="sound_div">
+                            <img id="soundimg" src="img/sound.png">
+                            <input type="range" name="volume" id="volume" oninput="setVolume()" value="20" min="0" max="100"><!-- 볼륨 조절 range bar -->
+                        </div>
+                        <div id="time_div">
+                            <span id="currentTime">00:00</span>
+                            <span> / </span>
+                            <span id="maxTime">00:00</span>
+                            <input type="range" name="timerange" id="timerange" oninput="setTime()" value="0" min="0"><!-- 노래 시간 조절 range bar -->
+                        </div>
+                        
+                    </div>
+                    <div id="playlistdiv"><!-- 노래 리스트 -->
+                        <% for(i=0; i<playlist.length; i++){ %>
+                            <div class="playlist_song_div">
+                                    <div class="playlist_content" id="<%= playlist[i].num %>" onclick="clickPlaylist(this)"><%= playlist[i].song_name %></div>
+                                <div class="playlist_song_button">
+                                    <div class="playlist_upper" id="<%= playlist[i].num %>" onclick="upper_Song_Playlist(this)"><img src="/img/upper.png" class="upperimg"></div>
+                                    <div class="playlist_lower" id="<%= playlist[i].num %>" onclick="lower_Song_Playlist(this)"><img src="/img/lower.png" class="lowerimg"></div>
+                                    <div class="playlist_delete" id="<%= playlist[i].num %>" onclick="delete_Song_Playlist(this)">X</div>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            <% }else{ %><!-- 사용자가 결제하지 않은 경우 -->
+                <div id="nocash">
+                    <div class="nocash">노래를 들으시려면 이용권 구매가 필요합니다.</div>
+                </div>
+            <% } %>
+        <% } else { %>
+            <!-- 사용자 비로그인 화면 -->
+            <form id="login-form" action="/auth/login" method="post">
+                <div id="login_button_input">
+                    <div id="login_input">
+                        <div class="input-group">
+                            <label class="login_text_deco" for="email">이메일</label><br>
+                            <input class="login_input_deco" type="email" name="email" required autofocus>
+                        </div>
+                        <div class="input-group">
+                            <label class="login_text_deco" for="password">비밀번호</label><br>
+                            <input class="login_input_deco" type="password" name="password" required>
+                        </div>
+                        <button id="login_btn" type="submit">Login</button>
+                    </div>
+                </div>
+                <div class="login_q_deco">아직 회원이 아니신가요? <a class="join" href="/auth/join" target="mainiframe">회원가입</a></div>
+            </form>
+        <% } %>
+    </body>
+    <script type="text/javascript" src="/javascript/layoutplaylist.js"></script>
+    <script>
+        // 플레이 리스트에 노래가 10글자 넘어가는 경우 ...으로 표시
+        var playlist_content_div = document.getElementsByClassName("playlist_content");
+        for(i=0; i<playlist_content_div.length; i++){
+            if(playlist_content_div[i].textContent.length>10){
+                var song_name = playlist_content_div[i].textContent.substring(0,10);
+                song_name = song_name + " ...";
+                playlist_content_div[i].textContent = song_name;
+            }
+        }
+        // iframe 만 새로 고침 코드
+        document.onkeydown = trapRefresh;
+        function trapRefresh() {
+            if(event.keyCode == 116){
+                event.keyCode = 0;
+                event.cancelBubble = true;
+                event.returnValue = false; 
+                document.getElementById("mainiframe").contentDocument.location.reload(true);
+            }
+        }
+
+        // iframe 길이 자동 설정
+        function calcHeight(){
+            // iframe 내부에 들어올 페이지의 길이
+            var the_height = document.getElementById('mainiframe').contentWindow.document.body.scrollHeight;
+
+            // iframe의 길이를 측정해준 the_height+20(하단 공백)로 변경
+            document.getElementById('mainiframe').height = the_height + 20;
+
+            // iframe의 style 중 overflow 속성을 hidden으로 설정해 불필요한 하단 공백 숨김 처리
+            document.getElementById('mainiframe').style.overflow = "hidden";
+        }
+        window.onload = () => {
+          if (new URL(location.href).searchParams.get('error')) {
+            alert(new URL(location.href).searchParams.get('error'));
+            window.location.href="/";
+          }
+        };
+    </script>
+</html>

@@ -1,0 +1,18 @@
+.text_deco01 {font-size: 25px; font-family: 'Noto Sans KR', sans-serif; font-weight: bolder; color: rgb(66, 65, 65); margin-left: 2.25%;}
+.text_deco02 {font-size: 25px; font-family: 'Noto Sans KR', sans-serif; font-weight: bolder; color: rgb(66, 65, 65); margin-left: 2.25%;}
+.text_deco03{font-size: 17px; font-family: 'Noto Sans KR', sans-serif; font-weight: bolder; color: rgb(66, 65, 65);}
+#notice_input{width: 150px; height: 40px; padding: 10px; font-size: 15px; border-radius: 20px;
+                   border: 2px solid rgb(66, 65, 65); box-shadow: 0 0 1px 1px rgb(66, 65, 65);
+                   -webkit-appearance: none; -moz-appearance: none; appearance: none; background: url('../../img/arrow.png') no-repeat 92% 50% / 10px 10px;}
+#subject{width: 98%; height: 40px; border-radius: 10px; padding: 5px 10px; font-size: 20px;
+            border: 3.5px solid rgb(99, 121, 137); box-shadow: 0 0 1px 1px rgb(99, 121, 137); margin-top:10px;}
+#content{width: 98%; height: 300px; border-radius: 10px; padding: 5px 10px; font-size: 20px;
+            border: 3.5px solid rgb(99, 121, 137); box-shadow: 0 0 1px 1px rgb(99, 121, 137); margin-top:10px;}
+.main_top{margin-top: 10px;}
+.input-group{margin-top: 10px;}
+#join-form{margin: 10px;}
+#add_notice{float: right; margin-top: 10px; padding: 7px 12px; width: 200px; height: 40px; border: none; border-radius: 25px;
+    background-color: rgb(224, 224, 224); font-size: 15px; font-weight: bolder; font-family: 'Cabin', sans-serif;}
+#add_question{float: right; margin-top: 10px; padding: 7px 12px; width: 200px; height: 40px; border: none; border-radius: 25px;
+    background-color: rgb(224, 224, 224); font-size: 15px; font-weight: bolder; font-family: 'Cabin', sans-serif;}
+#is_secret{width: 20px; height: 20px; cursor: pointer; padding-top: 5px;}

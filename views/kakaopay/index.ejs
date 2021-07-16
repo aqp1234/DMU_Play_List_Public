@@ -1,0 +1,15 @@
+<% if (!user.cash) { %><!-- 해당 사용자가 결제하지 않은 경우 -->
+<div class="row mt-5">
+  <h1 class="col-12 text-center my-5">KAKAO PAY</h1>
+  <form method="post" class="col-12 text-center" action='/kakaopay'>
+    <button class="btn btn-warning">카카오페이로 결제하기</button><!-- 결제 할수 있는 버튼 -->
+  </form>
+</div>
+<% }else{ %>
+  <div class="row mt-5">
+    <h1>이미 결제하셨습니다.</h1>
+  </div>
+  <div class="mt-5 pt-3 text-center">
+    <a href="/main" class="btn btn-warning">메인으로 돌아가기</a>
+  </div>
+<% } %>

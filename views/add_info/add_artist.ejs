@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/css/add_info/add_artist.css">
+        <!-- 한글 글씨체 -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+        <!-- 영어 글씨체 -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Cabin&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <form id="add_artist_form" action="/add_info/add_artist" method="POST" enctype="multipart/form-data">
+            <div id="title_deco">아티스트 추가</div>
+            <hr size="3" color="#637988">
+            <!-- 아티스트명 등록 -->
+            <div class="div_deco">
+                <label for="artist_name" id="artist_name">Artist Name *</label>
+                <input id="artist_name_input" type="text" name="artist_name" required>
+            </div>
+            <!-- (그룹일 경우) 멤버명 등록 : 띄어쓰기로 구분해서 저장 -->
+            <div class="div_deco">
+                <label for="member_name" id="member_name">Member Name</label>
+                <input id="member_name_input" type="text" name="member_name_string">
+                <div id="detail_info_member">* 멤버가 여러 명일 경우 다음과 같이 입력해주십시오. ex) 여승원,김민석,오예림</div>
+            </div> 
+            <!-- 데뷔일 -->
+            <div class="div_deco">
+                <label for="start_date" id="start_date">Debut *</label>
+                <input id="start_date_input" type="date" name="start_date" required>
+            </div>
+            <!-- 아티스트 사진 -->
+            <div class="div_deco">
+                <label for="file" id="artist_photo">Artist Photo</label>
+                <input multiple="multiple" id="artist_photo_input" type="file" name="file">
+                <div id="detail_info_photo">* 아티스트 사진은 여러 개 저장 할 수 있습니다. 단, 대표 사진은 가장 마지막 저장된 사진으로 지정됩니다.</div>
+            </div>
+            <!-- 아티스트 설명 -->
+            <div class="div_deco">
+                <label for="artist_detail" id="artist_detail">Artist_detail</label>
+                <textarea id="artist_detail_input" type="text" name="artist_detail"></textarea>
+            </div>
+            <button id="add_artist_btn" type="submit">Add New Artist</button>
+        </form>
+    </body>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/ko.min.js"></script>
+    <script type="text/javascript" src="/javascript/iframe.js"></script>
+</html>
